@@ -81,7 +81,7 @@ async function callClaude(apiKey, pageText, pageUrl) {
     } catch (e) {
       errText = await response.text();
     }
-    throw new Error(`API hatası (${response.status}): ${errText}`);
+    throw new Error(`API error (${response.status}): ${errText}`);
   }
 
   const data = await response.json();
@@ -100,7 +100,7 @@ async function callClaude(apiKey, pageText, pageUrl) {
     if (start !== -1 && end !== -1) {
       parsed = JSON.parse(raw.slice(start, end + 1));
     } else {
-      throw new Error("Model yanıtı geçerli JSON formatında değil.");
+      throw new Error("The model response is not in valid JSON format.");
     }
   }
   return parsed;
@@ -113,11 +113,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       try {
         const { apiKey } = await chrome.storage.local.get("apiKey");
         if (!apiKey) {
-          sendResponse({ ok: false, error: "API anahtarı ayarlanmamış. Lütfen uzantı ayarlarından Anthropic API anahtarınızı girin." });
+          sendResponse({ ok: false, error: "API key not set. Please enter your Anthropic API key in the extension settings." });
           return;
         }
         if (!message.pageText || message.pageText.trim().length < 50) {
-          sendResponse({ ok: false, error: "Sayfada analiz edilecek yeterli metin bulunamadı." });
+          sendResponse({ ok: false, error: "Insufficient text to analyze was found on the page." });
           return;
         }
         const result = await callClaude(apiKey, message.pageText, message.pageUrl || "");
