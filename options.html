@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<title>KVKK Bekçisi - Ayarlar</title>
+<link rel="stylesheet" href="options.css" />
+</head>
+<body>
+  <div class="wrap">
+    <div class="header">
+      <span class="brand-mark"></span>
+      <h1>KVKK Bekçisi · Ayarlar</h1>
+    </div>
+
+    <label for="apiKeyInput">Anthropic API Anahtarı</label>
+    <input type="password" id="apiKeyInput" placeholder="sk-ant-..." autocomplete="off" />
+    <p class="hint">
+      Anahtarınız yalnızca bu tarayıcıda, cihazınızda (<code>chrome.storage.local</code>) saklanır ve
+      analiz sırasında doğrudan Anthropic API'sine gönderilir. Anthropic dışında hiçbir sunucuya iletilmez.
+      Anahtarınızı <a href="https://console.anthropic.com/settings/keys" target="_blank">console.anthropic.com</a>
+      adresinden alabilirsiniz.
+    </p>
+
+    <div class="row">
+      <button id="saveBtn" class="primary-btn">Kaydet</button>
+      <button id="clearBtn" class="secondary-btn">Anahtarı Sil</button>
+    </div>
+
+    <p id="statusMsg" class="status"></p>
+  </div>
+  <script src="options.js"></script>
+</body>
+</html>

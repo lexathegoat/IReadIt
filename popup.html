@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>IReadIt</title>
+<link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark"></span>
+        <div class="brand-text">
+          <span class="brand-title">IReadIt</span>
+          <span class="brand-sub" id="hostLabel">scanning page…</span>
+        </div>
+      </div>
+      <button id="settingsBtn" class="icon-btn" title="Settings">⚙</button>
+    </header>
+
+    <main id="mainArea">
+
+      <!-- API key missing warning -->
+      <section id="noKeyView" class="panel hidden">
+        <p class="warn-text">An Anthropic API key is required for analysis.</p>
+        <button id="goSettingsBtn" class="primary-btn">Open Settings</button>
+      </section>
+
+      <!-- Initial screen -->
+      <section id="idleView" class="panel">
+        <p class="idle-text">Would you like me to scan this page's Privacy Policy / GDPR / KVKK content with AI and highlight potential risks?</p>
+        <button id="analyzeBtn" class="primary-btn glow">▶ Analyze This Page</button>
+      </section>
+
+      <!-- Loading -->
+      <section id="loadingView" class="panel hidden">
+        <div class="scanner">
+          <div class="scanner-ring"></div>
+        </div>
+        <p class="loading-text">Analyzing content<span id="dots">...</span></p>
+        <p class="timer-text"><span id="timerVal">0.0</span> sec</p>
+      </section>
+
+      <!-- Error -->
+      <section id="errorView" class="panel hidden">
+        <p class="error-text" id="errorMsg"></p>
+        <button id="retryBtn" class="secondary-btn">Try Again</button>
+      </section>
+
+      <!-- Result -->
+      <section id="resultView" class="panel hidden">
+
+        <div id="notPolicyBanner" class="not-policy-banner hidden">
+          This page does not appear to be a privacy/KVKK document. Available information is still listed below.
+        </div>
+
+        <div class="score-row">
+          <div class="score-circle" id="scoreCircle">
+            <span id="scoreVal">--</span>
+          </div>
+          <div class="score-info">
+            <span class="score-badge" id="riskLevelBadge">-</span>
+            <span class="elapsed-label">⏱ Analyzed in <span id="elapsedVal">-</span> sec</span>
+          </div>
+        </div>
+
+        <div class="summary-grid" id="summaryGrid"></div>
+
+        <h3 class="section-title">Risky / Important Clauses</h3>
+        <div id="clausesList" class="clauses-list"></div>
+
+        <h3 class="section-title" id="keywordsTitle">Detected Keywords</h3>
+        <div id="keywordsList" class="keywords-list"></div>
+
+        <button id="reanalyzeBtn" class="secondary-btn full-width">↻ Analyze Page Again</button>
+      </section>
+
+    </main>
+
+    <footer class="footer">
+      IReadIt v1.0 · Results are not legal advice.
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
