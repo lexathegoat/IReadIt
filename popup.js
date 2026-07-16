@@ -1,5 +1,3 @@
-// Privacy Guardian - popup.js
-
 const views = {
   noKey: document.getElementById("noKeyView"),
   idle: document.getElementById("idleView"),
@@ -43,8 +41,6 @@ function safeHost(url) {
   try { return new URL(url).host; } catch (e) { return "page"; }
 }
 
-// Function injected into the page to extract readable text
-// Must not use closures because it runs in the page context
 function extractPageTextFromDOM() {
   const keywordPattern = /(privacy|kvkk|personal\s*data|cookie|terms|usage\s*terms|notice|policy)/i;
 
